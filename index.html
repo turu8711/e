@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Redirecting...</title>
+<script>
+  const target = "https://example.com"; // ←リダイレクト先
+
+  const path  = window.location.pathname;
+  const query = window.location.search;
+  const hash  = window.location.hash;
+
+  window.location.replace(target + path + query + hash);
+</script>
+</head>
+<body>
+リダイレクト中...
+（移動しない場合はやり直してください）
+</body>
+</html>
