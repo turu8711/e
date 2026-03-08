@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://script.google.com https://script.googleusercontent.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';"
+  >
+  <title>QRチェックイン</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <h1 class="app-title">QRチェックイン</h1>
+    <p class="app-note">
+      公開ページからGAS APIへ照会します。カメラ利用時は周囲にQRが映り込まないよう注意してください。
+    </p>
+
+    <section id="auth-panel" class="auth-panel" aria-live="polite">
+      <h2 class="auth-title">アクセス認証</h2>
+      <p class="auth-note">
+        API乱用対策のため、先にパスワード認証が必要です。
+      </p>
+      <form id="auth-form" class="auth-form">
+        <input
+          id="access-password"
+          class="auth-input"
+          type="password"
+          autocomplete="current-password"
+          placeholder="アクセスパスワード"
+          required
+        >
+        <button id="auth-submit-btn" class="auth-submit-btn" type="submit">認証する</button>
+      </form>
+      <p id="auth-msg" class="auth-msg" data-level="info">未認証: パスワードを入力してください。</p>
+    </section>
+
+    <button id="start-btn" class="start-btn" type="button" disabled>カメラを起動</button>
+
+    <section id="scanner-panel" class="scanner-panel is-disabled" aria-live="polite">
+      <div id="video-wrapper" class="video-wrapper">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="camera-canvas"></canvas>
+        <canvas id="rect-canvas"></canvas>
+      </div>
+      <p id="status-msg" class="status-msg">待機中: 「カメラを起動」を押してください。</p>
+    </section>
+
+    <section class="log-panel">
+      <h2 class="log-title">ログ</h2>
+      <ul id="log-list" class="log-list"></ul>
+    </section>
+  </main>
+
+  <script src="./jsQR.js" defer></script>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
